@@ -41,6 +41,13 @@ locals {
 
       var.dynamic_memory == false ? {} : {
         dynamicMemoryConfig = local.dynamic_memory_config_omit_null
+      },
+      var.gpu_assignment_type == null ? {} : {
+        virtualMachineGPUs = [
+          {
+            assignmentType = var.gpu_assignment_type
+          }
+        ]
       }
     )
 

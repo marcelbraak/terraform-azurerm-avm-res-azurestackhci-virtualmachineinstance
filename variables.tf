@@ -328,3 +328,14 @@ variable "windows_ssh_config" {
   default     = null
   description = "SSH configuration with public keys for windows."
 }
+
+variable "gpu_assignment_type" {
+  type        = string
+  description = "Optional GPU assignment type for session host VMs."
+  default     = null
+
+  validation {
+    condition     = var.gpu_assignment_type == null || contains(["GpuDDA", "GpuP"], var.gpu_assignment_type)
+    error_message = "gpu_assignment_type must be either GpuDDA or GpuP."
+  }
+}
